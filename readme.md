@@ -22,3 +22,4 @@ Please use this flow as a references, but feel free to adjust the flow as you se
 - This test is not aiming for a perfect solution, but please try your best to display your understanding in backend development.
 - Please register your own account for [Omise](https://www.omise.co/docs) and [SCB](https://developer.scb/#/home) sanbox used for this test.
 - Test is optional, but it would be a plus since it illustartes your understanding in testing. 
+- You are not required to cover all casese, e.g. credit card error or etc.
