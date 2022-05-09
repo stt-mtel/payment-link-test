@@ -1,0 +1,12 @@
+{
+  "version": 1,
+  "paths": {
+    "/generate-link": {
+      "name": "/generate-link",
+      "lambdaFunction": "generatePaymentLinkLambda",
+      "permissions": {
+        "setting": "open"
+      }
+    }
+  }
+}
