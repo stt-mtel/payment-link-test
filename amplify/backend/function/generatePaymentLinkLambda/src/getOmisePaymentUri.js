@@ -1,7 +1,7 @@
 
-import { getSecretValue } from './getSecretValue';
+const { getSecretValue } = require('./getSecretValue');
 
-export const getOmisePaymentUri = async ({ amount, currency, title, description }) => {  
+exports.getOmisePaymentUri = async ({ amount, currency, title, description }) => {  
     const omisePublicKey = await getSecretValue('OMISE_PUBLIC_KEY');
     const omiseSecretKey = await getSecretValue('OMISE_SECRET_KEY');
   
@@ -19,7 +19,7 @@ export const getOmisePaymentUri = async ({ amount, currency, title, description 
     // };
   
     const link = {
-      amount,
+      amount: amount * 100,
       currency,
       multiple: false,
       title,
@@ -31,6 +31,6 @@ export const getOmisePaymentUri = async ({ amount, currency, title, description 
         });
         return response.payment_uri;
     }catch(e){
-        throw Error(e);
+        throw Error(JSON.stringify(e));
     }
   };

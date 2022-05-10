@@ -1,14 +1,14 @@
-import { getOmisePaymentUri } from "./getOmisePaymentUri";
-import { getSCBQRCode } from "./getScbQrCode";
+const { getOmisePaymentUri } = require("./getOmisePaymentUri");
+const { getSCBQRCode } = require("./getScbQrCode");
 
 exports.handler = async (event) => {
-  const payload = event.body;
+  const payload = JSON.parse(event.body);
   switch (payload.method) {
     case "creditCard":
-      const paymentUri = getOmisePaymentUri(payload);
+      const paymentUri = await getOmisePaymentUri(payload);
       return generateResponse(200, { paymentUri });
     case "qrCode":
-      const qrCodeBase64 = getSCBQRCode(payload);
+      const qrCodeBase64 = await getSCBQRCode(payload);
       return generateResponse(200, { qrCodeBase64 });
     default:
       return generateResponse(400, {

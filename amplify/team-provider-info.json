@@ -16,8 +16,11 @@
         "generatePaymentLinkLambda": {
           "secretsPathAmplifyAppId": "d18wdarzzhhxjn",
           "deploymentBucketName": "amplify-mtelpayment-dev-235847-deployment",
-          "s3Key": "amplify-builds/generatePaymentLinkLambda-436652753955742b4169-build.zip"
+          "s3Key": "amplify-builds/generatePaymentLinkLambda-75497754334173367475-build.zip"
         }
+      },
+      "auth": {
+        "mtelpaymente3573527": {}
       }
     }
   }

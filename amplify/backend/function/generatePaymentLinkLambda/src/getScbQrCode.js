@@ -1,3 +1,3 @@
-export const getSCBQRCode = () => {
+exports.getSCBQRCode = () => {
     return '';
 };
