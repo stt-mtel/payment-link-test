@@ -1,5 +1,5 @@
-/*
-Use the following code to retrieve configured secrets from SSM:
+
+// Use the following code to retrieve configured secrets from SSM:
 
 const aws = require('aws-sdk');
 
@@ -10,9 +10,12 @@ const { Parameters } = await (new aws.SSM())
   })
   .promise();
 
-Parameters will be of the form { Name: 'secretName', Value: 'secretValue', ... }[]
-*/
+// Parameters will be of the form { Name: 'secretName', Value: 'secretValue', ... }[]
 
+var omise = require('../index')({
+  'publicKey': process.env.OMISE_PUBLIC_KEY,
+  'secretKey': process.env.OMISE_SECRET_KEY,
+});
 
 exports.handler = async (event) => {
     // TODO implement
@@ -25,5 +28,18 @@ exports.handler = async (event) => {
     //  }, 
         body: JSON.stringify('Hello from Lambda!'),
     };
+
+    var link = {
+      'amount':      19000,
+      'currency':    'thb',
+      'multiple':    true,
+      'title':       'Cappuccino',
+      'description': 'Freshly brewed coffee',
+    };
+    
+    omise.links.create(link, function(err, resp) {
+      console.log(resp);
+    });
+    
     return response;
 };
