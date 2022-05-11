@@ -1,8 +1,22 @@
+/*
+Use the following code to retrieve configured secrets from SSM:
+
+const aws = require('aws-sdk');
+
+const { Parameters } = await (new aws.SSM())
+  .getParameters({
+    Names: ["OMISE_PUBLIC_KEY","OMISE_SECRET_KEY","SCB_API_KEY","SCB_SECRET_KEY"].map(secretName => process.env[secretName]),
+    WithDecryption: true,
+  })
+  .promise();
+
+Parameters will be of the form { Name: 'secretName', Value: 'secretValue', ... }[]
+*/
 const { getOmisePaymentUri } = require("./getOmisePaymentUri");
 const { getSCBQRCode } = require("./getScbQrCode");
 
 exports.handler = async (event) => {
-  const payload = JSON.parse(event.body);
+  const payload = JSON.parse(JSON.stringify(event.body));
   switch (payload.method) {
     case "creditCard":
       const paymentUri = await getOmisePaymentUri(payload);

@@ -10,14 +10,6 @@ exports.getOmisePaymentUri = async ({ amount, currency, title, description }) =>
       secretKey: omiseSecretKey,
     });
   
-    // const link = {
-    //   amount: 19000,
-    //   currency: "thb",
-    //   multiple: true,
-    //   title: "Cappuccino",
-    //   description: "Freshly brewed coffee",
-    // };
-  
     const link = {
       amount: amount * 100,
       currency,
@@ -26,9 +18,7 @@ exports.getOmisePaymentUri = async ({ amount, currency, title, description }) =>
       description,
     };
     try{
-        const response = await omise.links.create(link, function (err, resp) {
-          return resp;
-        });
+        const response = await omise.links.create(link);
         return response.payment_uri;
     }catch(e){
         throw Error(JSON.stringify(e));
