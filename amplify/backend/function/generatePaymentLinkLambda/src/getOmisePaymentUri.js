@@ -21,6 +21,7 @@ exports.getOmisePaymentUri = async ({ amount, currency, title, description }) =>
         const response = await omise.links.create(link);
         return response.payment_uri;
     }catch(e){
-        throw Error(JSON.stringify(e));
+      console.error(e);
+      throw Error('Error: Please contact an administrator');
     }
   };

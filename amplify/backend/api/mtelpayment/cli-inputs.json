@@ -1,0 +1,12 @@
+{
+  "version": 1,
+  "serviceConfiguration": {
+    "apiName": "mtelpayment",
+    "serviceName": "AppSync",
+    "gqlSchemaPath": "/Users/generalman025/Directories/Projects/payment-link-test/amplify/backend/api/mtelpayment/schema.graphql",
+    "defaultAuthType": {
+      "mode": "API_KEY",
+      "expirationTime": 7
+    }
+  }
+}

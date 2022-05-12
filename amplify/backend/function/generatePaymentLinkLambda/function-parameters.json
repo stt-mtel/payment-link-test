@@ -2,6 +2,26 @@
   "lambdaLayers": [],
   "secretNames": [
     "OMISE_PUBLIC_KEY",
-    "OMISE_SECRET_KEY"
+    "OMISE_SECRET_KEY",
+    "SCB_API_KEY",
+    "SCB_SECRET_KEY"
+  ],
+  "environmentVariableList": [
+    {
+      "cloudFormationParameterName": "scbGetTokenUri",
+      "environmentVariableName": "SCB_GET_TOKEN_URI"
+    },
+    {
+      "cloudFormationParameterName": "scbCreateQrCodeUri",
+      "environmentVariableName": "SCB_CREATE_QR_CODE_URI"
+    },
+    {
+      "cloudFormationParameterName": "scbReference3Prefix",
+      "environmentVariableName": "SCB_REFERENCE_3_PREFIX"
+    },
+    {
+      "cloudFormationParameterName": "scbBillerId",
+      "environmentVariableName": "SCB_BILLER_ID"
+    }
   ]
 }

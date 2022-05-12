@@ -16,11 +16,21 @@
         "generatePaymentLinkLambda": {
           "secretsPathAmplifyAppId": "d18wdarzzhhxjn",
           "deploymentBucketName": "amplify-mtelpayment-dev-235847-deployment",
-          "s3Key": "amplify-builds/generatePaymentLinkLambda-75497754334173367475-build.zip"
+          "s3Key": "amplify-builds/generatePaymentLinkLambda-6d4247335a336c646c56-build.zip",
+          "scbGetTokenUri": "https://api-sandbox.partners.scb/partners/sandbox/v1/oauth/token",
+          "scbCreateQrCodeUri": "https://api-sandbox.partners.scb/partners/sandbox/v1/payment/qrcode/create",
+          "scbReference3Prefix": "VHY",
+          "scbBillerId": "813144609798996"
         }
       },
       "auth": {
         "mtelpaymente3573527": {}
+      },
+      "hosting": {
+        "amplifyhosting": {
+          "appId": "d18wdarzzhhxjn",
+          "type": "manual"
+        }
       }
     }
   }

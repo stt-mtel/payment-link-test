@@ -18,6 +18,18 @@
     },
     "secretsPathAmplifyAppId": {
       "Type": "String"
+    },
+    "scbGetTokenUri": {
+      "Type": "String"
+    },
+    "scbCreateQrCodeUri": {
+      "Type": "String"
+    },
+    "scbReference3Prefix": {
+      "Type": "String"
+    },
+    "scbBillerId": {
+      "Type": "String"
     }
   },
   "Conditions": {
@@ -116,6 +128,62 @@
                   "OMISE_SECRET_KEY"
                 ]
               ]
+            },
+            "SCB_API_KEY": {
+              "Fn::Join": [
+                "",
+                [
+                  {
+                    "Fn::Sub": [
+                      "/amplify/${appId}/${env}/AMPLIFY_${functionName}_",
+                      {
+                        "appId": {
+                          "Ref": "secretsPathAmplifyAppId"
+                        },
+                        "env": {
+                          "Ref": "env"
+                        },
+                        "functionName": "generatePaymentLinkLambda"
+                      }
+                    ]
+                  },
+                  "SCB_API_KEY"
+                ]
+              ]
+            },
+            "SCB_SECRET_KEY": {
+              "Fn::Join": [
+                "",
+                [
+                  {
+                    "Fn::Sub": [
+                      "/amplify/${appId}/${env}/AMPLIFY_${functionName}_",
+                      {
+                        "appId": {
+                          "Ref": "secretsPathAmplifyAppId"
+                        },
+                        "env": {
+                          "Ref": "env"
+                        },
+                        "functionName": "generatePaymentLinkLambda"
+                      }
+                    ]
+                  },
+                  "SCB_SECRET_KEY"
+                ]
+              ]
+            },
+            "SCB_GET_TOKEN_URI": {
+              "Ref": "scbGetTokenUri"
+            },
+            "SCB_CREATE_QR_CODE_URI": {
+              "Ref": "scbCreateQrCodeUri"
+            },
+            "SCB_REFERENCE_3_PREFIX": {
+              "Ref": "scbReference3Prefix"
+            },
+            "SCB_BILLER_ID": {
+              "Ref": "scbBillerId"
             }
           }
         },
