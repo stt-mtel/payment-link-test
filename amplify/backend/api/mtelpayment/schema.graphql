@@ -12,4 +12,5 @@ type Transaction @model {
   status: String
   paymentDate: String
   reference: String
+  reference2: String
 }

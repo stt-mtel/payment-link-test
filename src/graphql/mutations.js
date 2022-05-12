@@ -16,6 +16,7 @@ export const createTransaction = /* GraphQL */ `
       status
       paymentDate
       reference
+      reference2
       createdAt
       updatedAt
     }
@@ -36,6 +37,7 @@ export const updateTransaction = /* GraphQL */ `
       status
       paymentDate
       reference
+      reference2
       createdAt
       updatedAt
     }
@@ -56,6 +58,7 @@ export const deleteTransaction = /* GraphQL */ `
       status
       paymentDate
       reference
+      reference2
       createdAt
       updatedAt
     }

@@ -16,7 +16,7 @@ const { getOmisePaymentUri } = require("./getOmisePaymentUri");
 const { getSCBQRCode } = require("./getScbQrCode");
 
 exports.handler = async (event) => {
-  const payload = JSON.parse(JSON.stringify(event.body));
+  const payload = JSON.parse(event.body);
   switch (payload.method) {
     case "creditCard":
       const paymentUri = await getOmisePaymentUri(payload);

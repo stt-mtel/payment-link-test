@@ -1,6 +1,7 @@
 import { useRef, useState } from "react";
 import { API, graphqlOperation } from "aws-amplify";
 import { createTransaction } from "./graphql/mutations";
+import Hashids from "hashids";
 import Box from "@mui/material/Box";
 import Card from "@mui/material/Card";
 import TextField from "@mui/material/TextField";
@@ -16,6 +17,7 @@ const Home = () => {
   const [link, setLink] = useState(null);
 
   const onClick = async () => {
+    const hashids = new Hashids();
     const response = await API.graphql(
       graphqlOperation(createTransaction, {
         input: {
@@ -24,6 +26,8 @@ const Home = () => {
           amount: parseInt(refAmount.current.value),
           currency: "thb",
           status: "pending",
+          reference: hashids.encode(Date.now(), 10).toUpperCase(),
+          reference2: hashids.encode(refAmount.current.value, 10).toUpperCase(),
         },
       })
     );

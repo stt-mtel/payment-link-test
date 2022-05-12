@@ -13,6 +13,7 @@ export const getTransaction = /* GraphQL */ `
       status
       paymentDate
       reference
+      reference2
       createdAt
       updatedAt
     }
@@ -35,6 +36,7 @@ export const listTransactions = /* GraphQL */ `
         status
         paymentDate
         reference
+        reference2
         createdAt
         updatedAt
       }

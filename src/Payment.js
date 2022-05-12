@@ -18,6 +18,7 @@ const Payment = () => {
   const [searchParams] = useSearchParams();
   const [method, setMethod] = useState(defaultOption);
   const [transaction, setTransaction] = useState(null);
+  const [qrCode, setQrCode] = useState(null);
 
   useEffect(() => {
     const retrieveTransaction = async (trxId) => {
@@ -30,7 +31,6 @@ const Payment = () => {
           console.error("Transaction is not pending");
           return;
         }
-        console.log("transaction", transaction);
         setTransaction(transaction);
       }
     };
@@ -69,18 +69,34 @@ const Payment = () => {
           id: transaction.id,
           amount: transaction.amount,
           currency: transaction.currency,
+          reference: transaction.reference,
+          reference2: transaction.reference2,
+        },
+      }
+    );
+  };
+  
+  const handleOnQRCodePayment = async () => {
+    const response = await API.post(
+      "generatePaymentLinkApi",
+      "/generate-link",
+      {
+        body: {
+          method: "qrCode",
+          id: transaction.id,
+          amount: transaction.amount,
+          currency: transaction.currency,
           title: transaction.title,
           description: transaction.description,
         },
       }
-    );
-    console.log("response", response);
-  };
-
-  const handleOnQRCodePayment = () => {};
-
-  return (
-    <Box sx={{ maxWidth: "50%" }}>
+      );
+      const qrCodeImage = `data:image/png;base64, ${response.qrCodeBase64}`;
+      setQrCode(qrCodeImage);
+    };
+    
+    return (
+      <Box sx={{ maxWidth: "50%" }}>
       <Card variant="outlined">
         <CardContent>
           <FormControl>
@@ -106,6 +122,9 @@ const Payment = () => {
             Proceed to Payment
           </Button>
         </CardActions>
+      </Card>
+      <Card>
+        <img src={qrCode} style={{width: '50%'}} alt="QR Code" />
       </Card>
     </Box>
   );
