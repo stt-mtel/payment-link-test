@@ -32,8 +32,6 @@ export const onUpdateTransaction = /* GraphQL */ `
       paymentDate
       reference
       reference2
-      createdAt
-      updatedAt
     }
   }
 `;

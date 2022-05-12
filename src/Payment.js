@@ -12,9 +12,11 @@ import RadioGroup from "@mui/material/RadioGroup";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import FormControl from "@mui/material/FormControl";
 import Typography from "@mui/material/Typography";
+import { onUpdateTransaction } from "./graphql/subscriptions";
 
 const Payment = () => {
   const defaultOption = "creditCard";
+  const [transactionId, setTransactionId] = useState(null);
   const [searchParams] = useSearchParams();
   const [method, setMethod] = useState(defaultOption);
   const [transaction, setTransaction] = useState(null);
@@ -22,6 +24,7 @@ const Payment = () => {
 
   useEffect(() => {
     const retrieveTransaction = async (trxId) => {
+      setTransactionId(trxId);
       const response = await API.graphql(
         graphqlOperation(getTransaction, { id: trxId })
       );
@@ -41,6 +44,21 @@ const Payment = () => {
     }
   }, [searchParams]);
 
+  useEffect(() => {
+    const subscription = API.graphql(
+      graphqlOperation(onUpdateTransaction)
+    ).subscribe({
+      next: ({ _, value }) => {
+        const { id, status } = value.data.onUpdateTransaction;
+        if (id === transactionId && status === "paid") {
+          alert("Payment is successful");
+        }
+      },
+      error: (error) => console.error(error),
+    });
+    return () => subscription.unsubscribe();
+  }, [transactionId]);
+
   const handleOnChange = (event) => {
     setMethod(event.target.value);
   };
@@ -54,8 +72,7 @@ const Payment = () => {
         handleOnQRCodePayment();
         break;
       default:
-          
-        break;
+        return;
     }
   };
 
@@ -69,13 +86,13 @@ const Payment = () => {
           id: transaction.id,
           amount: transaction.amount,
           currency: transaction.currency,
-          reference: transaction.reference,
-          reference2: transaction.reference2,
+          title: transaction.title,
+          description: transaction.description,
         },
       }
     );
   };
-  
+
   const handleOnQRCodePayment = async () => {
     const response = await API.post(
       "generatePaymentLinkApi",
@@ -86,17 +103,17 @@ const Payment = () => {
           id: transaction.id,
           amount: transaction.amount,
           currency: transaction.currency,
-          title: transaction.title,
-          description: transaction.description,
+          reference: transaction.reference,
+          reference2: transaction.reference2,
         },
       }
-      );
-      const qrCodeImage = `data:image/png;base64, ${response.qrCodeBase64}`;
-      setQrCode(qrCodeImage);
-    };
-    
-    return (
-      <Box sx={{ maxWidth: "50%" }}>
+    );
+    const qrCodeImage = `data:image/png;base64, ${response.qrCodeBase64}`;
+    setQrCode(qrCodeImage);
+  };
+
+  return (
+    <Box sx={{ maxWidth: "50%" }}>
       <Card variant="outlined">
         <CardContent>
           <FormControl>
@@ -124,7 +141,7 @@ const Payment = () => {
         </CardActions>
       </Card>
       <Card>
-        <img src={qrCode} style={{width: '50%'}} alt="QR Code" />
+        <img src={qrCode} style={{ width: "50%" }} alt="QR Code" />
       </Card>
     </Box>
   );
