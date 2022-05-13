@@ -1,6 +1,6 @@
 {
   "AWSTemplateFormatVersion": "2010-09-09",
-  "Description": "{\"createdOn\":\"Mac\",\"createdBy\":\"Amplify\",\"createdWith\":\"7.6.4\",\"stackType\":\"function-Lambda\",\"metadata\":{}}",
+  "Description": "{\"createdOn\":\"Mac\",\"createdBy\":\"Amplify\",\"createdWith\":\"8.1.0\",\"stackType\":\"function-Lambda\",\"metadata\":{}}",
   "Parameters": {
     "CloudWatchRule": {
       "Type": "String",
@@ -16,9 +16,6 @@
     "s3Key": {
       "Type": "String"
     },
-    "secretsPathAmplifyAppId": {
-      "Type": "String"
-    },
     "apimtelpaymentGraphQLAPIIdOutput": {
       "Type": "String",
       "Default": "apimtelpaymentGraphQLAPIIdOutput"
@@ -30,18 +27,6 @@
     "apimtelpaymentGraphQLAPIKeyOutput": {
       "Type": "String",
       "Default": "apimtelpaymentGraphQLAPIKeyOutput"
-    },
-    "scbGetTokenUri": {
-      "Type": "String"
-    },
-    "scbCreateQrCodeUri": {
-      "Type": "String"
-    },
-    "scbReference3Prefix": {
-      "Type": "String"
-    },
-    "scbBillerId": {
-      "Type": "String"
     }
   },
   "Conditions": {
@@ -74,12 +59,12 @@
         "FunctionName": {
           "Fn::If": [
             "ShouldNotCreateEnvResources",
-            "generatePaymentLinkLambda",
+            "confirmCreditCardPaymentLambda",
             {
               "Fn::Join": [
                 "",
                 [
-                  "generatePaymentLinkLambda",
+                  "confirmCreditCardPaymentLambda",
                   "-",
                   {
                     "Ref": "env"
@@ -97,94 +82,6 @@
             "REGION": {
               "Ref": "AWS::Region"
             },
-            "OMISE_PUBLIC_KEY": {
-              "Fn::Join": [
-                "",
-                [
-                  {
-                    "Fn::Sub": [
-                      "/amplify/${appId}/${env}/AMPLIFY_${functionName}_",
-                      {
-                        "appId": {
-                          "Ref": "secretsPathAmplifyAppId"
-                        },
-                        "env": {
-                          "Ref": "env"
-                        },
-                        "functionName": "generatePaymentLinkLambda"
-                      }
-                    ]
-                  },
-                  "OMISE_PUBLIC_KEY"
-                ]
-              ]
-            },
-            "OMISE_SECRET_KEY": {
-              "Fn::Join": [
-                "",
-                [
-                  {
-                    "Fn::Sub": [
-                      "/amplify/${appId}/${env}/AMPLIFY_${functionName}_",
-                      {
-                        "appId": {
-                          "Ref": "secretsPathAmplifyAppId"
-                        },
-                        "env": {
-                          "Ref": "env"
-                        },
-                        "functionName": "generatePaymentLinkLambda"
-                      }
-                    ]
-                  },
-                  "OMISE_SECRET_KEY"
-                ]
-              ]
-            },
-            "SCB_API_KEY": {
-              "Fn::Join": [
-                "",
-                [
-                  {
-                    "Fn::Sub": [
-                      "/amplify/${appId}/${env}/AMPLIFY_${functionName}_",
-                      {
-                        "appId": {
-                          "Ref": "secretsPathAmplifyAppId"
-                        },
-                        "env": {
-                          "Ref": "env"
-                        },
-                        "functionName": "generatePaymentLinkLambda"
-                      }
-                    ]
-                  },
-                  "SCB_API_KEY"
-                ]
-              ]
-            },
-            "SCB_SECRET_KEY": {
-              "Fn::Join": [
-                "",
-                [
-                  {
-                    "Fn::Sub": [
-                      "/amplify/${appId}/${env}/AMPLIFY_${functionName}_",
-                      {
-                        "appId": {
-                          "Ref": "secretsPathAmplifyAppId"
-                        },
-                        "env": {
-                          "Ref": "env"
-                        },
-                        "functionName": "generatePaymentLinkLambda"
-                      }
-                    ]
-                  },
-                  "SCB_SECRET_KEY"
-                ]
-              ]
-            },
             "API_MTELPAYMENT_GRAPHQLAPIIDOUTPUT": {
               "Ref": "apimtelpaymentGraphQLAPIIdOutput"
             },
@@ -193,18 +90,6 @@
             },
             "API_MTELPAYMENT_GRAPHQLAPIKEYOUTPUT": {
               "Ref": "apimtelpaymentGraphQLAPIKeyOutput"
-            },
-            "SCB_GET_TOKEN_URI": {
-              "Ref": "scbGetTokenUri"
-            },
-            "SCB_CREATE_QR_CODE_URI": {
-              "Ref": "scbCreateQrCodeUri"
-            },
-            "SCB_REFERENCE_3_PREFIX": {
-              "Ref": "scbReference3Prefix"
-            },
-            "SCB_BILLER_ID": {
-              "Ref": "scbBillerId"
             }
           }
         },
@@ -225,12 +110,12 @@
         "RoleName": {
           "Fn::If": [
             "ShouldNotCreateEnvResources",
-            "mtelpaymentLambdaRolee2d1b528",
+            "mtelpaymentLambdaRole23a73246",
             {
               "Fn::Join": [
                 "",
                 [
-                  "mtelpaymentLambdaRolee2d1b528",
+                  "mtelpaymentLambdaRole23a73246",
                   "-",
                   {
                     "Ref": "env"
@@ -301,63 +186,6 @@
         }
       }
     },
-    "AmplifyFunctionSecretsPolicy": {
-      "Type": "AWS::IAM::Policy",
-      "Properties": {
-        "PolicyName": "amplify-function-secrets-policy",
-        "Roles": [
-          {
-            "Ref": "LambdaExecutionRole"
-          }
-        ],
-        "PolicyDocument": {
-          "Version": "2012-10-17",
-          "Statement": [
-            {
-              "Effect": "Allow",
-              "Action": [
-                "ssm:GetParameter",
-                "ssm:GetParameters"
-              ],
-              "Resource": {
-                "Fn::Join": [
-                  "",
-                  [
-                    "arn:aws:ssm:",
-                    {
-                      "Ref": "AWS::Region"
-                    },
-                    ":",
-                    {
-                      "Ref": "AWS::AccountId"
-                    },
-                    ":parameter",
-                    {
-                      "Fn::Sub": [
-                        "/amplify/${appId}/${env}/AMPLIFY_${functionName}_",
-                        {
-                          "appId": {
-                            "Ref": "secretsPathAmplifyAppId"
-                          },
-                          "env": {
-                            "Ref": "env"
-                          },
-                          "functionName": "generatePaymentLinkLambda"
-                        }
-                      ]
-                    },
-                    "*"
-                  ]
-                ]
-              }
-            }
-          ]
-        }
-      },
-      "DependsOn": [
-        "LambdaExecutionRole"
-      ]
-    },
     "AmplifyResourcesPolicy": {
       "DependsOn": [
         "LambdaExecutionRole"
@@ -379,6 +207,26 @@
                 "appsync:GraphQL"
               ],
               "Resource": [
+                {
+                  "Fn::Join": [
+                    "",
+                    [
+                      "arn:aws:appsync:",
+                      {
+                        "Ref": "AWS::Region"
+                      },
+                      ":",
+                      {
+                        "Ref": "AWS::AccountId"
+                      },
+                      ":apis/",
+                      {
+                        "Ref": "apimtelpaymentGraphQLAPIIdOutput"
+                      },
+                      "/types/Query/*"
+                    ]
+                  ]
+                },
                 {
                   "Fn::Join": [
                     "",

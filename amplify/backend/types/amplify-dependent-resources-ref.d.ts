@@ -11,6 +11,12 @@ export type AmplifyDependentResourcesAttributes = {
             "Arn": "string",
             "Region": "string",
             "LambdaExecutionRole": "string"
+        },
+        "confirmCreditCardPaymentLambda": {
+            "Name": "string",
+            "Arn": "string",
+            "Region": "string",
+            "LambdaExecutionRole": "string"
         }
     },
     "api": {
@@ -25,6 +31,11 @@ export type AmplifyDependentResourcesAttributes = {
             "GraphQLAPIEndpointOutput": "string"
         },
         "confirmPaymentApi": {
+            "RootUrl": "string",
+            "ApiName": "string",
+            "ApiId": "string"
+        },
+        "confirmCreditCardPaymentApi": {
             "RootUrl": "string",
             "ApiName": "string",
             "ApiId": "string"

@@ -4,9 +4,35 @@
       "build": true,
       "providerPlugin": "awscloudformation",
       "service": "Lambda",
-      "dependsOn": []
+      "dependsOn": [
+        {
+          "category": "api",
+          "resourceName": "mtelpayment",
+          "attributes": [
+            "GraphQLAPIIdOutput",
+            "GraphQLAPIEndpointOutput",
+            "GraphQLAPIKeyOutput"
+          ]
+        }
+      ]
     },
     "confirmPaymentLambda": {
+      "build": true,
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda",
+      "dependsOn": [
+        {
+          "category": "api",
+          "resourceName": "mtelpayment",
+          "attributes": [
+            "GraphQLAPIIdOutput",
+            "GraphQLAPIEndpointOutput",
+            "GraphQLAPIKeyOutput"
+          ]
+        }
+      ]
+    },
+    "confirmCreditCardPaymentLambda": {
       "build": true,
       "providerPlugin": "awscloudformation",
       "service": "Lambda",
@@ -61,6 +87,20 @@
         {
           "category": "function",
           "resourceName": "confirmPaymentLambda",
+          "attributes": [
+            "Name",
+            "Arn"
+          ]
+        }
+      ]
+    },
+    "confirmCreditCardPaymentApi": {
+      "service": "API Gateway",
+      "providerPlugin": "awscloudformation",
+      "dependsOn": [
+        {
+          "category": "function",
+          "resourceName": "confirmCreditCardPaymentLambda",
           "attributes": [
             "Name",
             "Arn"

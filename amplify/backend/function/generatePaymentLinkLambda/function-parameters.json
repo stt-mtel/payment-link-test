@@ -23,5 +23,12 @@
       "cloudFormationParameterName": "scbBillerId",
       "environmentVariableName": "SCB_BILLER_ID"
     }
-  ]
+  ],
+  "permissions": {
+    "api": {
+      "mtelpayment": [
+        "Mutation"
+      ]
+    }
+  }
 }

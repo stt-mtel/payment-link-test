@@ -50,6 +50,7 @@ const Payment = () => {
     ).subscribe({
       next: ({ _, value }) => {
         const { id, status } = value.data.onUpdateTransaction;
+        console.log('trigger', id, status);
         if (id === transactionId && status === "paid") {
           alert("Payment is successful");
         }
@@ -72,6 +73,7 @@ const Payment = () => {
         handleOnQRCodePayment();
         break;
       default:
+        console.error("Invalid method");
         return;
     }
   };
@@ -91,6 +93,8 @@ const Payment = () => {
         },
       }
     );
+
+    openInNewTab(response.paymentUri);
   };
 
   const handleOnQRCodePayment = async () => {
@@ -111,6 +115,11 @@ const Payment = () => {
     const qrCodeImage = `data:image/png;base64, ${response.qrCodeBase64}`;
     setQrCode(qrCodeImage);
   };
+
+  const openInNewTab = (url) => {
+    const newWindow = window.open(url, '_blank', 'noopener,noreferrer')
+    if (newWindow) newWindow.opener = null
+  }
 
   return (
     <Box sx={{ maxWidth: "50%" }}>

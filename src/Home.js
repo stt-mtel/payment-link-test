@@ -27,7 +27,7 @@ const Home = () => {
           currency: "thb",
           status: "pending",
           reference: hashids.encode(Date.now(), 10).toUpperCase(),
-          reference2: hashids.encode(refAmount.current.value, 10).toUpperCase(),
+          reference2: 'DM',
         },
       })
     );

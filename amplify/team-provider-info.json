@@ -16,7 +16,7 @@
         "generatePaymentLinkLambda": {
           "secretsPathAmplifyAppId": "d18wdarzzhhxjn",
           "deploymentBucketName": "amplify-mtelpayment-dev-235847-deployment",
-          "s3Key": "amplify-builds/generatePaymentLinkLambda-774165464e5244643961-build.zip",
+          "s3Key": "amplify-builds/generatePaymentLinkLambda-337159653151345a7164-build.zip",
           "scbGetTokenUri": "https://api-sandbox.partners.scb/partners/sandbox/v1/oauth/token",
           "scbCreateQrCodeUri": "https://api-sandbox.partners.scb/partners/sandbox/v1/payment/qrcode/create",
           "scbReference3Prefix": "VHY",
@@ -24,7 +24,11 @@
         },
         "confirmPaymentLambda": {
           "deploymentBucketName": "amplify-mtelpayment-dev-235847-deployment",
-          "s3Key": "amplify-builds/confirmPaymentLambda-626d4e5347726a39477a-build.zip"
+          "s3Key": "amplify-builds/confirmPaymentLambda-7777486b33494547672f-build.zip"
+        },
+        "confirmCreditCardPaymentLambda": {
+          "deploymentBucketName": "amplify-mtelpayment-dev-235847-deployment",
+          "s3Key": "amplify-builds/confirmCreditCardPaymentLambda-72434d78685939616865-build.zip"
         }
       },
       "auth": {

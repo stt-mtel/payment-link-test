@@ -1,4 +1,10 @@
-/*
+/* Amplify Params - DO NOT EDIT
+	API_MTELPAYMENT_GRAPHQLAPIENDPOINTOUTPUT
+	API_MTELPAYMENT_GRAPHQLAPIIDOUTPUT
+	API_MTELPAYMENT_GRAPHQLAPIKEYOUTPUT
+	ENV
+	REGION
+Amplify Params - DO NOT EDIT *//*
 Use the following code to retrieve configured secrets from SSM:
 
 const aws = require('aws-sdk');
@@ -16,6 +22,7 @@ const { getOmisePaymentUri } = require("./getOmisePaymentUri");
 const { getSCBQRCode } = require("./getScbQrCode");
 
 exports.handler = async (event) => {
+  console.log(`EVENT: ${JSON.stringify(event)}`);
   const payload = JSON.parse(event.body);
   switch (payload.method) {
     case "creditCard":
@@ -35,8 +42,10 @@ const generateResponse = (statusCode, body) => {
   return {
     statusCode,
     headers: {
-      "Access-Control-Allow-Origin": "*",
-      "Access-Control-Allow-Headers": "*",
+      'Access-Control-Allow-Origin': '*',
+      'Access-Control-Allow-Methods': '*',
+      "Access-Control-Allow-Credentials" : true,
+      'Content-Type': 'application/json',
     },
     body: JSON.stringify(body),
   };
