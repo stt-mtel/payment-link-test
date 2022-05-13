@@ -1,0 +1,12 @@
+{
+  "version": 1,
+  "paths": {
+    "/confirm-payment": {
+      "name": "/confirm-payment",
+      "lambdaFunction": "confirmPaymentLambda",
+      "permissions": {
+        "setting": "open"
+      }
+    }
+  }
+}

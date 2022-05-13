@@ -1,0 +1,12 @@
+{
+  "version": 1,
+  "paths": {
+    "/confirm-creditcard-payment": {
+      "name": "/confirm-creditcard-payment",
+      "lambdaFunction": "confirmCreditCardPaymentLambda",
+      "permissions": {
+        "setting": "open"
+      }
+    }
+  }
+}

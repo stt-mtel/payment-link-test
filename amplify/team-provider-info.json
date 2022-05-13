@@ -1,0 +1,45 @@
+{
+  "dev": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-mtelpayment-dev-235847-authRole",
+      "UnauthRoleArn": "arn:aws:iam::131485244922:role/amplify-mtelpayment-dev-235847-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::131485244922:role/amplify-mtelpayment-dev-235847-authRole",
+      "Region": "ap-southeast-1",
+      "DeploymentBucketName": "amplify-mtelpayment-dev-235847-deployment",
+      "UnauthRoleName": "amplify-mtelpayment-dev-235847-unauthRole",
+      "StackName": "amplify-mtelpayment-dev-235847",
+      "StackId": "arn:aws:cloudformation:ap-southeast-1:131485244922:stack/amplify-mtelpayment-dev-235847/4bcb8050-cfb9-11ec-824c-029bc335d9ee",
+      "AmplifyAppId": "d18wdarzzhhxjn"
+    },
+    "categories": {
+      "function": {
+        "generatePaymentLinkLambda": {
+          "secretsPathAmplifyAppId": "d18wdarzzhhxjn",
+          "deploymentBucketName": "amplify-mtelpayment-dev-235847-deployment",
+          "s3Key": "amplify-builds/generatePaymentLinkLambda-337159653151345a7164-build.zip",
+          "scbGetTokenUri": "https://api-sandbox.partners.scb/partners/sandbox/v1/oauth/token",
+          "scbCreateQrCodeUri": "https://api-sandbox.partners.scb/partners/sandbox/v1/payment/qrcode/create",
+          "scbReference3Prefix": "VHY",
+          "scbBillerId": "813144609798996"
+        },
+        "confirmPaymentLambda": {
+          "deploymentBucketName": "amplify-mtelpayment-dev-235847-deployment",
+          "s3Key": "amplify-builds/confirmPaymentLambda-7777486b33494547672f-build.zip"
+        },
+        "confirmCreditCardPaymentLambda": {
+          "deploymentBucketName": "amplify-mtelpayment-dev-235847-deployment",
+          "s3Key": "amplify-builds/confirmCreditCardPaymentLambda-72434d78685939616865-build.zip"
+        }
+      },
+      "auth": {
+        "mtelpaymente3573527": {}
+      },
+      "hosting": {
+        "amplifyhosting": {
+          "appId": "d18wdarzzhhxjn",
+          "type": "manual"
+        }
+      }
+    }
+  }
+}
